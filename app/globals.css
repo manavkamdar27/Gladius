@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --teal: #245f61;
+  --teal-deep: #1a4547;
+  --gold: #a99a78;
+  --gold-soft: rgba(169, 154, 120, 0.35);
+  --parchment: #ebe6dc;
+  --ink: #1c2b2b;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background: var(--gold);
+    color: var(--teal-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-[0.74rem] font-semibold uppercase text-gold;
+    letter-spacing: 0.32em;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 border font-semibold text-[0.92rem] px-7 py-3.5 transition-all duration-300;
+    letter-spacing: 0.03em;
+  }
+  .btn-solid {
+    @apply bg-teal text-parchment border-teal hover:bg-teal-deep hover:border-gold hover:-translate-y-0.5 hover:shadow-authority;
+  }
+  .btn-ghost {
+    @apply bg-transparent text-teal border-gold hover:bg-gold/15;
+  }
+
+  .glass {
+    @apply border border-gold-soft;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .glass-dark {
+    @apply border border-gold/35;
+    background: rgba(235, 230, 220, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+@layer utilities {
+  .text-stroke-gold {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--gold);
+  }
+
+  .pause-on-hover:hover .animate-ticker {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-ticker {
+    animation: none;
+  }
+}

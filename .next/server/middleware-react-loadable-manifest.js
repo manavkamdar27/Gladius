@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST="{\"components/Hero.jsx -> ./canvas/StructuralScene\":{\"id\":\"components/Hero.jsx -> ./canvas/StructuralScene\",\"files\":[\"static/chunks/_app-pages-browser_components_canvas_StructuralScene_jsx.js\"]}}"
