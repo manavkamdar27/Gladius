@@ -1,48 +1,10 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { maskRise, stagger, EASE } from "@/lib/motion";
 
-// R3F only ever runs client-side; SSR disabled for the WebGL scene
-const StructuralScene = dynamic(() => import("./canvas/StructuralScene"), {
-  ssr: false,
-  loading: () => <CanvasFallback />,
-});
-
-function CanvasFallback() {
-  return (
-    <div className="absolute inset-0 flex items-center justify-center opacity-50" aria-hidden="true">
-      <svg viewBox="0 0 400 400" className="w-[70%] max-w-xl">
-        <g fill="none" stroke="#A99A78" strokeWidth="1.4">
-          <rect x="80" y="120" width="240" height="160" />
-          <rect x="130" y="80" width="150" height="240" opacity="0.55" />
-          <rect x="60" y="160" width="280" height="90" opacity="0.35" transform="rotate(-8 200 205)" />
-        </g>
-        <g fill="#245F61">
-          <circle cx="80" cy="120" r="3.5" />
-          <circle cx="320" cy="120" r="3.5" />
-          <circle cx="80" cy="280" r="3.5" />
-          <circle cx="320" cy="280" r="3.5" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
 export default function Hero() {
-  // Only mount WebGL on ≥768px screens for mobile performance
-  const [show3D, setShow3D] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    setShow3D(mq.matches);
-    const fn = (e) => setShow3D(e.matches);
-    mq.addEventListener("change", fn);
-    return () => mq.removeEventListener("change", fn);
-  }, []);
-
   // Typography parallax against scroll
   const { scrollY } = useScroll();
   const yText = useTransform(scrollY, [0, 600], [0, 76]);
@@ -53,14 +15,6 @@ export default function Hero() {
       id="top"
       className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-28 pb-20 text-center"
     >
-      {show3D ? (
-        <Suspense fallback={<CanvasFallback />}>
-          <StructuralScene />
-        </Suspense>
-      ) : (
-        <CanvasFallback />
-      )}
-
       <motion.div
         style={{ y: yText, opacity: opacityText }}
         className="relative z-10 max-w-4xl will-change-transform"

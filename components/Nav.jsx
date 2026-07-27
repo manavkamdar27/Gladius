@@ -3,16 +3,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import { NAV_LINKS } from "@/lib/data";
-
-function BrandMark({ size = 26 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <rect x="4" y="9" width="24" height="14" stroke="#A99A78" strokeWidth="1.6" />
-      <rect x="10" y="4" width="12" height="24" stroke="#245F61" strokeWidth="1.6" />
-    </svg>
-  );
-}
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -33,14 +25,15 @@ export default function Nav() {
           : "py-5"
       }`}
     >
-      <a
-        href="#top"
-        className="flex items-center gap-2.5 font-serif font-bold text-lg tracking-wider text-teal"
-      >
-        <BrandMark />
-        <span>
-          GLADIUS<em className="not-italic text-gold ml-0.5">LAW</em>
-        </span>
+      <a href="#top" className="flex items-center">
+        <Image
+          src="/images/logo.png"
+          alt="Gladius Law"
+          width={677}
+          height={191}
+          priority
+          className="h-8 w-auto md:h-9"
+        />
       </a>
 
       {/* Desktop links */}
